@@ -1,0 +1,8 @@
+<% if issue.respond_to?(:geom) && issue.project&.module_enabled?(:gtt) && issue.editable? &&
+      (cf = RedmineGttUldk::Settings.field(:parcel)) && issue.custom_field_value(cf).present? %>
+  <p class="gtt-uldk">
+    <%= link_to sprite_icon('reload', l(:button_gtt_uldk_geocode)), gtt_uldk_geocode_issue_path(issue),
+                method: :post, class: 'icon icon-reload',
+                data: (issue.geom.present? ? { confirm: l(:text_gtt_uldk_replace_confirm) } : {}) %>
+  </p>
+<% end %>
